@@ -1,0 +1,219 @@
+.tab {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tab > input[type="radio"] {
+  display: none;
+}
+
+.tab-content {
+  display: none;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+#tab-btn-1:checked~#content-1,
+#tab-btn-2:checked~#content-2,
+#tab-btn-3:checked~#content-3 {
+  display: block;
+}
+
+.tab > label {
+  display: block;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+  text-decoration: none;
+  color: #0d6efd;
+  border: 0;
+  border-radius: 0.375rem;
+  background: 0 0;
+}
+
+.tab > input[type="radio"]:checked + label {
+  cursor: default;
+  color: #fff;
+  background-color: #0d6efd;
+}
+
+
+body {
+    background: #edf2f7;
+}
+details {/* Стили для элемента details */
+    display: block; /* Отображение как блок */
+    background: #fff; /* Белый фон */
+    box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Тень */
+    border-radius: 8px; /* Закругленные углы */
+    overflow: hidden; /* Скрытие переполнения */
+    margin-bottom: 1.5rem; /* Отступ снизу */
+}
+summary::-webkit-details-marker {/* Скрытие маркера summary */
+    display: none;
+}
+summary::-moz-list-bullet {
+    list-style-type: none;
+}
+summary::marker {
+    display: none;
+}
+summary {/* Стили для summary */
+    display: block; /* Отображение как блок */
+    font-size: 1.4em; /* Размер шрифта */
+    cursor: pointer; /* Указатель курсора */
+    position: relative; /* Относительное позиционирование */
+    padding: .3em .3em .3em 1.4em; /* Отступы */
+    border-bottom: 1px solid #e2e8f0; /* Нижняя граница */
+}
+summary:before {/* Иконка перед summary */
+    top: .4em; /* Положение сверху */
+    left: .3em; /* Положение слева */
+    color: transparent; /* Прозрачный цвет */
+    background: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjM0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIzNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOC41OSAxNi4zNGw0LjU4LTQuNTktNC41OC00LjU5TDEwIDUuNzVsNiA2LTYgNnoiLz48L3N2Zz4=") no-repeat 50% 50% / 1em 1em;
+    width: 1em; /* Ширина */
+    height: 1em; /* Высота */
+    content: ""; /* Пустое содержимое */
+    position: absolute; /* Абсолютное позиционирование */
+    transition: transform .5s; /* Плавный переход */
+}
+details[open] > summary:before {/* Поворот иконки при открытии details */
+    transform: rotateZ(90deg); /* Поворот на 90 градусов */
+}
+summary ~ * {/* Отступы для содержимого после summary */
+    padding: 0 2em 10px 2em; /* Отступы */
+}
+details[open] summary ~ * { /* Анимация при открытии details */
+    animation: sweep .5s ease-in-out; /* Анимация */
+}
+@keyframes sweep {/* Определение анимации sweep */
+    0% { opacity: 0; } /* Начальная прозрачность */
+    100% { opacity: 1; } /* Конечная прозрачность */
+}
+summary:focus {/* Стили при фокусе на summary */
+    outline: 0; /* Убираем обводку */
+    box-shadow: inset 0 0 1px rgba(0,0,0,0.3), inset 0 0 2px rgba(0,0,0,0.3); /* Внутренние тени */
+}
+
+/* Стили для прямоугольника */
+.rectangle_to_calls {
+    width: 150px; /* Ширина прямоугольника */
+    height: 50px; /* Высота прямоугольника */
+    background-color: #0d6efd; /* Цвет фона прямоугольника */
+    color: white; /* Цвет шрифта */
+    border-radius: 8px; /* Закругленные углы */
+    margin-right: 20px;
+    text-align: center; /* Центрируем текст по горизонтали */
+
+    /* Flexbox для центрирования по вертикали и горизонтали */
+    display: flex; /* Включаем Flexbox */
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+}
+
+body_to_calls {
+    display: flex; /* Используем flexbox для выравнивания */
+    justify-content: flex-end; /* Выравнивание по правому краю */
+    align-items: center; /* Вертикальное центрирование */
+}
+
+
+/* Стили для контейнера */
+.container {
+    display: flex; /* Используем flexbox для разделения на колонки */
+}
+
+/* Стили для левой колонки */
+.left-column {
+    flex: 1; /* Занимает 1 часть пространства */
+    background-color: #4CAF50; /* Цвет фона левой колонки */
+    color: white; /* Цвет текста */
+    padding: 20px; /* Отступы внутри колонки */
+}
+
+/* Стили для правой колонки */
+.right-column {
+    flex: 1; /* Занимает 1 часть пространства */
+    background-color: #2196F3; /* Цвет фона правой колонки */
+    color: white; /* Цвет текста */
+    padding: 20px; /* Отступы внутри колонки */
+}
+
+.button_add_call {
+            width: 150px; /* Ширина кнопки */
+            height: 50px; /* Высота кнопки */
+            background-color: #0d6efd; /* Цвет фона кнопки */
+            color: white; /* Цвет текста */
+            border: none; /* Убираем рамку */
+            border-radius: 8px; /* Закругленные углы */
+            cursor: pointer; /* Курсор при наведении */
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Центрируем текст по горизонтали */
+            align-items: center; /* Центрируем текст по вертикали */
+            font-size: 16px; /* Размер шрифта */
+            text-decoration: none; /* Убираем подчеркивание */
+}
+
+.text-r{
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+.align--left {
+    text-align: left; /* Выравнивание текста по левому краю */
+}
+
+td {
+    vertical-align: top; /* Выравнивание текста сверху */
+}
+
+.button_edit_call {
+            width: 150px; /* Ширина кнопки */
+            height: 50px; /* Высота кнопки */
+            background-color: #0d6efd; /* Цвет фона кнопки */
+            color: white; /* Цвет текста */
+            border: none; /* Убираем рамку */
+            border-radius: 8px; /* Закругленные углы */
+            cursor: pointer; /* Курсор при наведении */
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Центрируем текст по горизонтали */
+            align-items: center; /* Центрируем текст по вертикали */
+            font-size: 16px; /* Размер шрифта */
+            text-decoration: none; /* Убираем подчеркивание */
+            margin-right: 25px;
+}
+
+.button_delete_call {
+            width: 150px; /* Ширина кнопки */
+            height: 50px; /* Высота кнопки */
+            background-color: #8B0000; /* Цвет фона кнопки */
+            color: white; /* Цвет текста */
+            border: none; /* Убираем рамку */
+            border-radius: 8px; /* Закругленные углы */
+            cursor: pointer; /* Курсор при наведении */
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Центрируем текст по горизонтали */
+            align-items: center; /* Центрируем текст по вертикали */
+            font-size: 16px; /* Размер шрифта */
+            text-decoration: none; /* Убираем подчеркивание */
+}
+
+.button__call {
+            width: 150px; /* Ширина кнопки */
+            height: 50px; /* Высота кнопки */
+            background-color: #0d6efd; /* Цвет фона кнопки */
+            color: white; /* Цвет текста */
+            border: none; /* Убираем рамку */
+            border-radius: 8px; /* Закругленные углы */
+            cursor: pointer; /* Курсор при наведении */
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Центрируем текст по горизонтали */
+            align-items: center; /* Центрируем текст по вертикали */
+            font-size: 16px; /* Размер шрифта */
+            text-decoration: none; /* Убираем подчеркивание */
+}
+
+body_button {
+    display: flex;
+    justify-content: flex-end; /* Выравнивание по правому краю */
+}

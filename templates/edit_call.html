@@ -1,0 +1,77 @@
+{% block content %}
+<head>
+    <title>Редактирование вызова</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<h1>{% block title %} Редактирование вызова {% endblock %}</h1>
+<form method="post"> <!-- Одна форма для всех полей -->
+    <p>
+        <table style="width: 100%;">
+            <tr>
+                <td style="text-align: left;">
+                    <ptext class="text-r">
+                        <label for="exampleSelect">Варианты:</label>
+                        <select id="dispatchers" name="dispatchers">
+                            {% for dispatcher in dispatchers %}
+                                <option value="{{ dispatcher }}" {% if dispatcher == selected_dispatcher %}selected{% endif %}>{{ dispatcher }}</option>
+                            {% endfor %}
+                        </select>
+                    </ptext>
+
+                    <p>
+                        <label for="name_called">ФИО вызывавшего</label>
+                        <input type="text" pattern="[а-яА-ЯёЁ\s]+$" name="name_called" placeholder="ФИО вызвавшего" value="{{ name_called }}">
+                    </p>
+
+                    <p>
+                        <label for="patient_name">ФИО пациента</label>
+                        <input type="text" pattern="[а-яА-ЯёЁ\s]+$" name="patient_name" placeholder="ФИО пациента" value="{{ patient_name }}">
+                    </p>
+
+                    <p>
+                        <label for="reason">Причина вызова:</label>
+                        <br>
+                        <textarea name="reason" pattern="[а-яА-ЯёЁ0-9.,;:!? ]+$" placeholder="Причина вызова" rows="15" cols="60">{{ reason }}</textarea>
+                    </p>
+
+                    <p>
+                        <label for="adres">Адрес</label>
+                        <input type="text" pattern="[0-9а-яА-ЯёЁ.,;:!? ]+$"   name="adres" placeholder="Адрес" value="{{ adres }}" required>
+                    </p>
+                </td>
+
+
+                    <td style="text-align: right;">
+                        <body_button><button class="button__call" type="button" onclick="addForms()">Добавить бригаду</button></body_button>
+                    <ptext class="text-r">
+                        <div class="align--left">
+                            <div id="form-container"></div>
+                        </div>
+                    </ptext>
+                    </td>
+
+                    <script src="{{ url_for('static', filename='script.js') }}"></script>
+                    <script>
+                        const brigades = {{ brigades|tojson }};
+                        const selected_brigades = {{ selected_brigades|tojson }};
+                        const departure_times = {{ Departure_Times|tojson }};
+                        const arrival_times = {{ Arrival_Times|tojson }};
+                        const closure_times = {{ Closure_Times|tojson }};
+
+                        // Инициализация форм при загрузке страницы
+                        window.onload = function() {
+                            selected_brigades.forEach((brigade, index) => {
+                                addForms(brigade, departure_times[index], arrival_times[index], closure_times[index]);
+                            });
+                        };
+                    </script>
+                    </tr>
+                </table>
+            </p>
+
+    <p>
+        <button class="button__call" type="submit">Сохранить изменения</button>
+    </p>
+</form>
+{% endblock %}
+

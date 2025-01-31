@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Управления вызовами скорой помощи</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <h1> Управления вызовами скорой помощи </h1>
+    </body>
+<style>
+
+  /* скрываем все .tab-content */
+  .tab-content {
+    display: none;
+  }
+
+  /* отображаем только тот контент, который соответствует отмеченной радоикнопки */
+  #tab-btn-1:checked~#content-1,
+  #tab-btn-2:checked~#content-2,
+  #tab-btn-3:checked~#content-3 {
+    display: block;
+  }
+</style>
+
+<div class="tab">
+  <input checked id="tab-btn-1" name="tab-btn" type="radio" value="">
+  <label for="tab-btn-1">Вызовы</label>
+  <input id="tab-btn-2" name="tab-btn" type="radio" value="">
+  <label for="tab-btn-2">Бригады</label>
+  <div class="tab-content" id="content-1"><!-- Содержимое вызывов -->
+    <div class="calls">
+        {% block content %} {% endblock %}
+        <h1>{% block title %} <a href="{{ url_for('create_call') }}" button class="button_add_call">Добавить вызов</a> {% endblock %}</h1>
+{% for call in calls %}
+<div class='calls'>
+    <details>
+        <summary><table style="width: 100%;"><tr><td style="text-align: left;">№Вызова:  {{ call[0] }} <br> Адрес:  {{ call[8] }}</td>
+            <td style="text-align: right;"><body_to_calls><div class="rectangle_to_calls"> {{ call[11] }} </div> </body_to_calls></td></tr></table></summary>
+    <p><table style="width: 100%;"><tr>
+        <td style="text-align: left;">
+            <p class="text-r">
+            Дата и время вызова:  {{call[12]}} <br> Время принятия вызова:  {{ call[4] }} <br>ФИО Вызывавшего:  {{ call[5] }} <br> ФИО пациента:  {{ call[6] }}<br>
+            Причина вызова: {{call[7]}} <br> Адрес вызова: {{call[8]}} <br> Время закрытия вызова: {{call[9]}}
+            </p>
+        </td>
+
+            <td style="text-align: right;">
+                {% for brigade in brigades %}
+                {% if call[0] == brigade[10] %}
+                <pa class="text-r">
+                <p class="align--left">
+                код бригады отправленной на вызов {{brigade[0]}} <br> время выезда бригады {{brigade[12]}} <br>
+                время прибытия бригады {{brigade[13]}} <br> время закрытия вызова бригады {{brigade[14]}}<br><hr>
+                {% endif %}
+                {% endfor %}
+                    <body_button>
+                        <a href="{{ url_for('edit_call', call_id=call[0]) }}" button class="button_edit_call">Изменить</a>
+                        <a href="{{ url_for('delete_call', call_id=call[0]) }}" button class="button_delete_call">Удалить</a>
+                    </body_button>
+                </p>
+                </pa>
+
+            </td>
+        </tr></table></p>
+    </details>
+</div>
+{% endfor %}
+    </div>
+  </div>
+
+
+
+  <div class="tab-content" id="content-2"><!-- Содержимое бригады-->
+{% for all_brigade in all_brigades %}
+<div class='calls'>
+    <details>
+        <summary><table style="width: 100%;"><tr><td style="text-align: left;">№Бригады:  {{ all_brigade[0] }} <br> Текущий адрес:  {{ all_brigade[7] }}</td>
+            <td style="text-align: right;"><body_to_calls><div class="rectangle_to_calls"> {{ all_brigade[10] }} </div> </body_to_calls></td></tr></table></summary>
+        <p>
+        <td style="text-align: left;">
+            <p class="text-r">
+            Номер машины: {{all_brigade[6]}}<br> Врач: {{all_brigade[11]}}<br> Фельдшер: {{all_brigade[12]}}<br>
+            Водитель: {{all_brigade[13]}}<br> Дата дежурства: {{all_brigade[14]}}
+            </p>
+        </td>
+        </p>
+    </details>
+</div>
+{% endfor %}
+  </div>
+
+</div>
+</html>
